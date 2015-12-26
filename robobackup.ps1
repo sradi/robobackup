@@ -1,11 +1,11 @@
-# Wenn dieses Skript nicht ausgeführt werden kann, liegt es möglicherweise der restriktiven Default-Konfiguration unter Windows.
-# Folgendes Kommando ausführen: Set-ExecutionPolicy RemoteSigned
-
 function printBackupJob($Job) {
 	echo "$($Job.JobName)	$($Job.Id)"
 }
 
 function killBackupJobs($Processes) {
+	foreach ($proc in $Processes) {
+		kill $proc.Id
+	}
 }
 
 function rollLogfile($Path, $MaxFilesToKeep) {
@@ -29,6 +29,7 @@ $SyncInterval = 30
 $BackupJobsConfiguration = "$((Get-ChildItem Env:USERPROFILE).Value)/.robobackup-jobs.csv"
 
 $BackupJobs = Import-Csv -Path $BackupJobsConfiguration
+$BackupJobProcesses = @()
 
 foreach ($Job in $BackupJobs) {
 	$JobObject = startBackupJob `
@@ -39,4 +40,21 @@ foreach ($Job in $BackupJobs) {
 		-ExcludedDirectories $Job.ExcludedDirectories
 	
 	printBackupJob($JobObject)
+	$BackupJobProcesses += $JobObject
+}
+
+write-host "Robobackup-Jobs erfolgreich gestartet. Strg+C für Abbruch."
+# Warte auf "kill"
+try
+{
+    while($true)
+    {
+        Start-Sleep -Seconds 30
+    }
+}
+finally
+{
+    write-host "Beende Robobackup-Jobs..."
+	killBackupJobs $BackupJobProcesses
+	write-host "Beendet."
 }
