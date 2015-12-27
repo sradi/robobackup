@@ -1,3 +1,11 @@
+param([String]$BackupJobsConfigFile = "$((Get-ChildItem Env:USERPROFILE).Value)/.robobackup-jobs.csv")
+
+If (!(Test-Path $BackupJobsConfigFile)){
+	write-host "No configuration file '$($BackupJobsConfigFile)' found."
+	exit 1
+}
+$BackupJobs = Import-Csv -Path $BackupJobsConfigFile
+
 function printBackupJob($Job) {
 	echo "$($Job.JobName)	$($Job.Id)"
 }
@@ -27,9 +35,7 @@ $LogBasePath = 'D:\temp\robobackup'
 If (!(Test-Path $LogBasePath)){ New-Item -ItemType Directory $LogBasePath }
 $MaxFilesToKeep = 5
 $SyncInterval = 30
-$BackupJobsConfiguration = "$((Get-ChildItem Env:USERPROFILE).Value)/.robobackup-jobs.csv"
 
-$BackupJobs = Import-Csv -Path $BackupJobsConfiguration
 $BackupJobProcesses = @()
 
 foreach ($Job in $BackupJobs) {
