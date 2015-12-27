@@ -21,3 +21,4 @@ Folgendes Kommando ausführen: Set-ExecutionPolicy RemoteSigned
 ## Todo
 - Parametriesierbar, ob "mirror" /MIR oder "extend" /E backup
 - optionaler Parameter für eigenen Pfad zur Joblisten-Datei
+- Prozess-Status (exitcode) nach Job-Start prüfen und ggf. Warnung ausgeben
