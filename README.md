@@ -5,7 +5,7 @@ This script can be configured to mirror a list of directories to backup destinat
 The script starts a robocopy process for each directory, that should be synced.
 Each robocopy process keeps running in background and syncs changes from the source directory to the destination every 30 minutes.
 
-## Configuation
+## Configuration
 - Create a CSV file (comma separated values)
 - add a row with the titles Name,Source,Target,ExcludedFiles,ExcludedDirectories
 - add a row for each directory, you would like to backup
