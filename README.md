@@ -22,3 +22,5 @@ Folgendes Kommando ausführen: Set-ExecutionPolicy RemoteSigned
 ## Todo
 - Parametriesierbar, ob "mirror" /MIR oder "extend" /E backup
 - Prozess-Status (exitcode) nach Job-Start und in regelmäßigen Intervallen prüfen und ggf. Warnung ausgeben
+- Rolliere Logfiles nach Robobackup-Neustart
+- Unterbreche backup (wöchentlich?), liste Dateien auf, die nur im Ziel existieren, verschiebe sie in einen "Papierkorb"-Verzeichnis starte backup wieder.
