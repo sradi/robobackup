@@ -6,7 +6,7 @@ The script starts a robocopy process for each directory, that should be synced.
 Each robocopy process keeps running in background and syncs changes from the source directory to the destination every 30 minutes.
 
 ## Configuration
-- Create a CSV file (comma separated values)
+- Create a CSV file
 - add a row with the titles Name,Source,Target,ExcludedFiles,ExcludedDirectories
 - add a row for each directory, you would like to backup
 - call .\robobackup.ps1
